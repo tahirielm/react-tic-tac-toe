@@ -7,6 +7,7 @@ function App() {
   const [grid, setGrid] = useState(EMPTY_GRID)
   const [turn, setTurn] = useState('X')
   const [winner, setWinner] = useState(null)
+  const [isDraw, setIsDraw] = useState(false)
 
   function checkGrid(grid){
     let empty = false;
@@ -18,23 +19,28 @@ function App() {
       }
     }
     if (!empty) {
-      return false
+      setIsDraw(true)
+      return
     }
     for (let i = 0; i < 3; i++) {
       // CHECK ROWS
       if (grid[i][0] !== ' ' && grid[i][0] === grid[i][1] && grid[i][0] === grid[i][2]) {
-        return true
+        setWinner(turn)
+        return
       }
       // CHECK COLUMNS
       if(grid[0][i] !== ' ' && grid[0][i] === grid[1][i] && grid[0][i] == grid[2][i]){
-        return true
+        setWinner(turn)
+        return
       }
       // CHECK DIAGONALS
       if( (grid[0][0] !== ' ' && grid[0][0] === grid[1][1] && grid[0][0] === grid[2][2])
       || grid[0][2] !== ' ' && grid[0][2]  === grid[1][1] && grid[0][2] === grid[2][0] )
         {
-          return true
+          setWinner(turn)
+          return
       }
+      setTurn(turn === 'X' ? 'O' : 'X')
     }
   }
 
@@ -42,17 +48,14 @@ function App() {
     let newGrid = [...grid]
     newGrid[rowIdx][cellIdx] = turn
     setGrid(newGrid)
-    setTurn(turn === 'X' ? 'O' : 'X')
-    if(checkGrid(grid)){
-      setWinner(turn)
-      console.log("Game Over, winner is : " + turn)
-    }
+    checkGrid(grid)
   }
 
   return (
     <div className="container">
       <h2 className="win-message">{winner ? `Game Over, The winner is : ${winner}` : ""}</h2>
-      <h2 className="turn-message">{!winner ? `It's ${turn}'s turn` : ""}</h2>
+      <h2 className="draw-message">{isDraw ? "It's a Draw" : ""}</h2>
+      <h2 className="turn-message">{(!winner && !isDraw) ? `It's ${turn}'s turn` : ""}</h2>
       <div className='grid'>
         {grid.map((row, rowIdx )=>{
           return <div className="row" key={rowIdx}>
