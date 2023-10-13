@@ -1,0 +1,23 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.grid{
+  display: grid;
+  grid-template-rows: repeat(3, 1fr);
+}
+
+.cell{
+  height:80px;
+  width: 80px;
+  background-color: white;
+  color: black;
+  outline-width: 1px;
+  outline-style: auto;
+  outline-color: black;
+  /* font-size: 22px; */
+  border: 1px solid transparent;
+}
