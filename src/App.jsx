@@ -51,7 +51,8 @@ function App() {
 
   return (
     <div className="container">
-      <div className="win-message">{winner ? `Game Over, The winner is : ${winner}` : ""}</div>
+      <h2 className="win-message">{winner ? `Game Over, The winner is : ${winner}` : ""}</h2>
+      <h2 className="turn-message">{!winner ? `It's ${turn}'s turn` : ""}</h2>
       <div className='grid'>
         {grid.map((row, rowIdx )=>{
           return <div className="row" key={rowIdx}>

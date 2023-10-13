@@ -6,8 +6,16 @@
 }
 
 .grid{
-  display: grid;
-  grid-template-rows: repeat(3, 1fr);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.row{
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .cell{
@@ -20,4 +28,8 @@
   outline-color: black;
   /* font-size: 22px; */
   border: 1px solid transparent;
+}
+
+.win-message{
+  color: green;
 }
